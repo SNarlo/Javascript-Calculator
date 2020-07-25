@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="calc-body">
+        <div class="window">
+            <div class="result-window"></div>
+        </div>
+        <div class="buttons">
+            <button class="button" id="7">7</button>
+            <button class="button" id="8">8</button>
+            <button class="button" id="9">9</button>
+            <button class="button" id="÷">÷</button>
+            <button class="button" id="4">4</button>
+            <button class="button" id="5">5</button>
+            <button class="button" id="6">6</button>
+            <button class="button" id="x">x</button>
+            <button class="button" id="1">1</button>
+            <button class="button" id="2">2</button>
+            <button class="button" id="3">3</button>
+            <button class="button" id="-">-</button>
+            <button class="button" id="0">0</button>
+            <button class="button" id=".">.</button>
+            <button class="button" id="=">=</button>
+            <button class="button" id="+">+</button>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    // Array which stores the values entered
+    let valsEntered = [];
+
+    
+    // Fucntion for displaying the numbers selected on the calculator screen
+    let buttonClick = document.querySelector('.buttons');
+    buttonClick.addEventListener('click', displayValue);
+    function displayValue(e) {
+        let value = e.target.id;
+        let result = document.querySelector('.result-window');
+        if (value == '') {return;} 
+        else {
+            valsEntered.push(value);
+            result.textContent = valsEntered;
+        }
+        
+    }
+
+    function add() {
+        
+    }
+
+    function subtract() {
+
+    }
+
+    function multiply() {
+    
+    }
+
+    function divide() {
+
+    }
+
+
+</script>
+</html>
