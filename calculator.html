@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="CA">CA</button>
     <div class="calc-body">
         <div class="window">
             <div class="result-window"></div>
@@ -16,11 +17,11 @@
             <button class="button" id="7">7</button>
             <button class="button" id="8">8</button>
             <button class="button" id="9">9</button>
-            <button class="button" id="÷">÷</button>
+            <button class="button" id="/">÷</button>
             <button class="button" id="4">4</button>
             <button class="button" id="5">5</button>
             <button class="button" id="6">6</button>
-            <button class="button" id="x">x</button>
+            <button class="button" id="*">x</button>
             <button class="button" id="1">1</button>
             <button class="button" id="2">2</button>
             <button class="button" id="3">3</button>
@@ -35,38 +36,112 @@
 </body>
 
 <script>
-    // Array which stores the values entered
-    let valsEntered = [];
+    // The string holding the equation entered into the calculator
+    let equationEvaluated = "";
+    let valueShown = "";
 
-    
     // Fucntion for displaying the numbers selected on the calculator screen
     let buttonClick = document.querySelector('.buttons');
     buttonClick.addEventListener('click', displayValue);
+    let result = document.querySelector('.result-window');
     function displayValue(e) {
-        let value = e.target.id;
-        let result = document.querySelector('.result-window');
-        if (value == '') {return;} 
-        else {
-            valsEntered.push(value);
-            result.textContent = valsEntered;
+        let displayedValue = e.target.innerText; // this value is shown on the screen
+        let calcValue = e.target.id; // this value uses different symbols 
+        if (calcValue == '') {return;} 
+        else if (calcValue == '+' || calcValue == '-' || calcValue == '*' || calcValue == '/') {
+            clearScreen();
+            let splitEquation = displayedValue.split(/[calcValue]/);
+            if (splitEquation.length != 2) {
+                result.textContent = valueShown;
+                equationEvaluated += ("" + calcValue); 
+                console.log(equationEvaluated)
+            } else {
+                calcEquals();
+                equationEvaluated += ("" + calcValue);
+                console.log(equationEvaluated);
+            }
+        } else if (calcValue == "=") {
+            if (equationEvaluated.split(/[*+-/]/).length != 2) {
+                ;
+            } else {
+                calcEquals();
+            } 
         }
-        
+        else {
+            equationEvaluated += ("" + calcValue);
+            valueShown += ("" + displayedValue);
+            result.textContent = valueShown;
+        }
     }
-
-    function add() {
-        
-    }
-
-    function subtract() {
-
-    }
-
-    function multiply() {
     
+    // The brains of the calculator, evaluates the eqaution and splits it into the correct methods
+    function calcEquals() {   
+        let splitSubtraction = equationEvaluated.split(/[-]/);
+        let splitAddition = equationEvaluated.split(/[+]/);
+        let splitMultiplication = equationEvaluated.split(/[*]/);
+        let splitDivision = equationEvaluated.split(/[/]/);
+
+        if (splitSubtraction.length == 2) {
+            result.textContent = subtract(splitSubtraction);
+            equationEvaluated = subtract(splitSubtraction);
+        } else if (splitAddition.length == 2) {
+            result.textContent = add(splitAddition);
+            equationEvaluated = add(splitAddition);
+        } else if (splitDivision.length == 2) {
+            result.textContent = divide(splitDivision);
+            equationEvaluated = divide(splitDivision);
+        } else if (splitMultiplication.length == 2) {
+            result.textContent = multiply(splitMultiplication);
+            equationEvaluated = multiply(splitMultiplication);  
+        } else {
+            ;
+        }
     }
 
-    function divide() {
+    // The addition function
+    function add(addEquation) {
+        let answer = 0;
+        answer += parseFloat(addEquation[0]) + parseFloat(addEquation[1]);
+        return answer;
+    }
 
+    // The subtraction fucntion
+    function subtract(subEquation) {
+        let answer = 0; 
+        answer += parseFloat(subEquation[0]) - parseFloat(parssubEquation[1]);
+        return answer;
+    }
+
+    // The mutiply function 
+    function multiply(multEquation) {
+        let answer = 0; 
+        answer += parseFloat(multEquation[0]) * parseFloat(multEquation[1]);
+        return answer;
+    }
+
+    // The divide fucntion 
+    function divide(divEquation) {
+        let answer = 0; 
+        answer += parseFloat(divEquation[0]) / parseFloat(divEquation[1]);
+        return answer;
+    }
+
+
+    // This funciton clears the memeory of the calculator with the CA button
+    clearButton = document.querySelector('#CA');
+    clearButton.addEventListener('click', clear);
+    function clear() {
+        let resultWindow = document.querySelector('.result-window');
+        resultWindow.textContent = "";
+        valueShown = "";
+        equationEvaluated = "";
+    };
+
+    // This function when called only clears the screen
+    function clearScreen() {
+        let resultWindow = document.querySelector('.result-window');
+        resultWindow.textContent = "";
+        valueShown = "";
     }
 
 
