@@ -8,28 +8,31 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="CA">CA</button>
     <div class="calc-body">
         <div class="window">
             <div class="result-window"></div>
         </div>
         <div class="buttons">
+            <button class="button" id="AC">AC</button>
+            <button class="button" id="del"><img class="backspace" src="backspace.png" alt=""></button>
+            <button class="special" id="neg">+/-</button>
+            <button class="special" id="+">+</button>
             <button class="button" id="7">7</button>
             <button class="button" id="8">8</button>
             <button class="button" id="9">9</button>
-            <button class="button" id="/">÷</button>
+            <button class="special" id="/">÷</button>
             <button class="button" id="4">4</button>
             <button class="button" id="5">5</button>
             <button class="button" id="6">6</button>
-            <button class="button" id="*">x</button>
+            <button class="special" id="*">x</button>
             <button class="button" id="1">1</button>
             <button class="button" id="2">2</button>
             <button class="button" id="3">3</button>
-            <button class="button" id="-">-</button>
-            <button class="button" id="0">0</button>
+            <button class="special" id="-">-</button>
             <button class="button" id=".">.</button>
-            <button class="button" id="=">=</button>
-            <button class="button" id="+">+</button>
+            <button class="button" id="0">0</button>
+            <button class="button answer special" id="=">=</button>
+            
         </div>
     </div>
     
@@ -47,35 +50,33 @@
     function displayValue(e) {
         let displayedValue = e.target.innerText; // this value is shown on the screen
         let calcValue = e.target.id; // this value uses different symbols 
-        if (calcValue == '') {return;} 
-        else if (calcValue == '+' || calcValue == '-' || calcValue == '*' || calcValue == '/') {
+        if (calcValue == '') {
+            ;
+        } else if (parseFloat(calcValue) % 1 == 0 || calcValue == ".") {
+            equationEvaluated += ("" + calcValue);
+            valueShown += ("" + displayedValue);
+            result.textContent = valueShown;
+        } else if (calcValue == '+' || calcValue == '-' || calcValue == '*' || calcValue == '/') {
             clearScreen();
-            let splitEquation = displayedValue.split(/[calcValue]/);
-            if (splitEquation.length != 2) {
+            let splitEquation = equationEvaluated.split(/[*+-/]/);
+            if (splitEquation.length < 2) {
                 result.textContent = valueShown;
                 equationEvaluated += ("" + calcValue); 
-                console.log(equationEvaluated)
             } else {
                 calcEquals();
                 equationEvaluated += ("" + calcValue);
-                console.log(equationEvaluated);
             }
         } else if (calcValue == "=") {
-            if (equationEvaluated.split(/[*+-/]/).length != 2) {
+            if (equationEvaluated.split(/[*+-/]/).length < 2) {
                 ;
             } else {
                 calcEquals();
             } 
         }
-        else {
-            equationEvaluated += ("" + calcValue);
-            valueShown += ("" + displayedValue);
-            result.textContent = valueShown;
-        }
     }
     
     // The brains of the calculator, evaluates the eqaution and splits it into the correct methods
-    function calcEquals() {   
+    function calcEquals() {  
         let splitSubtraction = equationEvaluated.split(/[-]/);
         let splitAddition = equationEvaluated.split(/[+]/);
         let splitMultiplication = equationEvaluated.split(/[*]/);
@@ -100,35 +101,55 @@
 
     // The addition function
     function add(addEquation) {
+        for (let i = 0; i < addEquation.length - 1; i++) { // checks if there is a negation
+            if (addEquation[i].includes('neg')) { // replaces it if there is
+                addEquation[i] = addEquation[i].replace('neg', '-');
+            }
+        }
         let answer = 0;
         answer += parseFloat(addEquation[0]) + parseFloat(addEquation[1]);
-        return answer;
+        return Math.round(answer * 100)/100;
     }
 
     // The subtraction fucntion
     function subtract(subEquation) {
+        for (let i = 0; i < subEquation.length - 1; i++) { // checks if there is a negation
+            if (subEquation[i].includes('neg')) { // replaces it if there is
+                subEquation[i] = subEquation[i].replace('neg', '-');
+            }
+        }
         let answer = 0; 
-        answer += parseFloat(subEquation[0]) - parseFloat(parssubEquation[1]);
-        return answer;
+        answer += parseFloat(subEquation[0]) - parseFloat(subEquation[1]);
+        return Math.round(answer * 100)/100;
     }
 
     // The mutiply function 
     function multiply(multEquation) {
+        for (let i = 0; i < multEquation.length - 1; i++) { // checks if there is a negation
+            if (multEquation[i].includes('neg')) { // replaces it if there is
+                multEquation[i] = multEquation[i].replace('neg', '-');
+            }
+        }
         let answer = 0; 
         answer += parseFloat(multEquation[0]) * parseFloat(multEquation[1]);
-        return answer;
+        return Math.round(answer * 100)/100;
     }
 
     // The divide fucntion 
     function divide(divEquation) {
+        for (let i = 0; i < divEquation.length - 1; i++) { // checks if there is a negation
+            if (divEquation[i].includes('neg')) { // replaces it if there is
+                divEquation[i] = divEquation[i].replace('neg', '-');
+            }
+        }
         let answer = 0; 
         answer += parseFloat(divEquation[0]) / parseFloat(divEquation[1]);
-        return answer;
+        return Math.round(answer * 100)/100;
     }
 
 
     // This funciton clears the memeory of the calculator with the CA button
-    clearButton = document.querySelector('#CA');
+    clearButton = document.querySelector('#AC');
     clearButton.addEventListener('click', clear);
     function clear() {
         let resultWindow = document.querySelector('.result-window');
@@ -143,6 +164,24 @@
         resultWindow.textContent = "";
         valueShown = "";
     }
+
+
+    // This event handler handles what happens when the backspace key is pressed
+    let backSpace = document.querySelector('#del');
+    backSpace.addEventListener('click', () => {
+        let delEquation = equationEvaluated;
+        let shownEquationDeleted = valueShown;
+        equationEvaluated = delEquation.slice(0, -1);
+        valueShown = shownEquationDeleted.slice(0, -1);
+        result.textContent = valueShown;
+    })
+
+    // Function which adds a negation to the equation string when the negation button is pressed 
+    let negative = document.querySelector('#neg');
+    negative.addEventListener('click', () => {
+        equationEvaluated = 'neg' + equationEvaluated;
+        valueShown = '-' + valueShown;
+    })
 
 
 </script>

@@ -13,11 +13,11 @@ body {
     max-width: 380px;
     height: fit-content;
     border-radius: 10px;
-    background-color: lightblue;
+    background-color: white;
 }
 
 .window {
-    height: 75px;
+    height: 70px;
     width: auto;
     margin-top: 20px;
 }
@@ -26,9 +26,10 @@ body {
     display: block;
     width: inherit;
     height: inherit;
-    border: 2px solid grey;
+    border: 2px solid orange;
     margin: 10px 20px 10px 20px;
-    background-color: #90ad84;
+    background-color: gray;
+    color: yellow;
     letter-spacing: 2px;
     font-size: x-large;
     overflow: hidden;
@@ -42,17 +43,45 @@ body {
     width: inherit;
     height: inherit;
     display: grid;
-    grid-template-columns: 70px 70px 70px 70px;
-    grid-template-rows: 70px 70px 70px 70px;
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px 50px;
     gap: 20px;
     padding: 20px;
-    border-radius: 20px;
 }
 
-#CA {
-    background-color: red;
-    height: 50px;
-    width: 50px;
+.button, .special {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
     outline: none;
-    border-radius: 20px;
+    background-color: gray;
+    color: yellow;
+    font-weight: 700;
+    border: none;
 }
+
+.answer {
+    width: 120px;
+    border-radius: 100px;
+    outline: none;
+    background-color: orange;
+}
+
+.backspace {
+    height: 20px;
+    width: 20px;
+    color: blueviolet;
+}
+
+#AC {
+    background-color: red;
+}
+
+.special:focus {
+    background-color: green;
+}
+
+
+
+
