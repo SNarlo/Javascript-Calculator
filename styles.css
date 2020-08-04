@@ -1,7 +1,15 @@
 body {
     display: flex;
     justify-content: center;
-    font-family: 'Orbitron';
+    font-family: 'Raleway', sans-serif;
+}
+
+.heading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ff2842;
+    letter-spacing: 5px;
 }
 
 .calc-body {
@@ -10,30 +18,36 @@ body {
     justify-content: center;
     border: 1px solid black;
     width: fit-content;
-    max-width: 380px;
+    max-width: 300px;
     height: fit-content;
     border-radius: 10px;
-    background-color: white;
+    background-color: #232A3E;
+    -webkit-box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
+    -moz-box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
+    box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
 }
 
 .window {
-    height: 70px;
+    height: 80px;
     width: auto;
-    margin-top: 20px;
 }
 
 .result-window {
     display: block;
     width: inherit;
     height: inherit;
-    border: 2px solid orange;
+    border: 2px solid #ff2842;
     margin: 10px 20px 10px 20px;
-    background-color: gray;
-    color: yellow;
+    padding: 10px;
+    background-color: #eff0f2;
+    color: #201e2a;
     letter-spacing: 2px;
     font-size: x-large;
     overflow: hidden;
-    overflow-wrap: break-word;    
+    overflow-wrap: break-word;   
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000; 
 }
 
 .buttons {
@@ -55,31 +69,43 @@ body {
     align-items: center;
     border-radius: 100px;
     outline: none;
-    background-color: gray;
-    color: yellow;
+    background-color: #eff0f2;
+    color: #ff2842;
     font-weight: 700;
     border: none;
+    -moz-box-shadow:    inset 0 0 5px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow:         inset 0 0 5px #000000; 
+}   
+
+.button:active, .special:active {
+    -moz-box-shadow:    inset 0 0 8px #000000;
+    -webkit-box-shadow: inset 0 0 8px #000000;
+    box-shadow:         inset 0 0 8px #000000; 
+    border: 1px solid #232A3E;
+
 }
 
 .answer {
     width: 120px;
     border-radius: 100px;
     outline: none;
-    background-color: orange;
+    background-color: #eff0f2;
+    color: #ff2842;
 }
 
 .backspace {
     height: 20px;
     width: 20px;
-    color: blueviolet;
 }
 
 #AC {
-    background-color: red;
+    background-color: #ff2842;
+    color: #201e2a;
 }
 
 .special:focus {
-    background-color: green;
+    background-color: orange;
 }
 
 
