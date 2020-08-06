@@ -1,6 +1,7 @@
 body {
     display: flex;
     justify-content: center;
+    align-self: flex-start;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -16,12 +17,15 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid black;
+    border-top: 2px solid #41485c;
+    border-right: 4px solid #2f374d;
+    border-bottom: 10px solid #41485c;
+    border-left: 4px solid #2f374d;
     width: fit-content;
     max-width: 300px;
     height: fit-content;
     border-radius: 10px;
-    background-color: #232A3E;
+    background-color: #232a3e;
     -webkit-box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
     -moz-box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
     box-shadow: 0px 0px 27px 2px rgba(67,68,97,1);
@@ -109,5 +113,9 @@ body {
 }
 
 
+@media only screen and (max-width: 760px) {
+    body {
+        margin-top: 20%;
+    }
 
-
+}

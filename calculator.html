@@ -89,18 +89,20 @@
         if (splitSubtraction.length == 2) {
             result.textContent = subtract(splitSubtraction);
             equationEvaluated = subtract(splitSubtraction);
+            checkIfNeg();  // function to see if the result has a negative value and changes it
         } else if (splitAddition.length == 2) {
             result.textContent = add(splitAddition);
             equationEvaluated = add(splitAddition);
+            checkIfNeg();  
         } else if (splitDivision.length == 2) {
             result.textContent = divide(splitDivision);
             equationEvaluated = divide(splitDivision);
+            checkIfNeg(); 
         } else if (splitMultiplication.length == 2) {
             result.textContent = multiply(splitMultiplication);
-            equationEvaluated = multiply(splitMultiplication);  
-        } else {
-            ;
-        }
+            equationEvaluated = multiply(splitMultiplication);
+            checkIfNeg();
+        } 
     }
 
     // The addition function
@@ -186,6 +188,13 @@
         equationEvaluated = 'neg' + equationEvaluated;
         valueShown = '-' + valueShown;
     })
+
+    // function which replaces '-' with 'neg' so .split is not affected
+    function checkIfNeg() {
+        let equation = "" + equationEvaluated
+        e = equation.replace('-', 'neg');
+        equationEvaluated = e;
+    }
 
 
 </script>
